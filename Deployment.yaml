@@ -1,0 +1,68 @@
+--- 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: portal-muhasebe-api
+  namespace: acente365-microservice
+spec:
+  selector:
+    matchLabels:
+      app: portal-muhasebe-api-app
+      version: "1"
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 50%
+      maxUnavailable: 50%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: portal-muhasebe-api-app
+        version: "1"
+    spec:
+      nodeSelector:
+        bot: bot
+      containers:
+      - name: portal-muhasebe-api
+        image: core.harbor.domain:8443/api/portal-muhasebe-api:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+          protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: portal-muhasebe-api-svc
+  namespace: acente365-microservice
+spec:
+  selector:
+    app: portal-muhasebe-api-app
+  ports:
+  - protocol: TCP
+    name: http
+    port: 80
+    targetPort: 80
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: portal-muhasebe-api-virtualhost
+  namespace: acente365-microservice
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+spec:
+  rules:
+  - host: portal-muhasebe-api-virtualhost.10.1.0.5.nip.io
+    http:
+      paths:
+      - backend:
+          service:
+            name: portal-muhasebe-api-svc
+            port:
+              number: 80
+        path: /
+        pathType: ImplementationSpecific

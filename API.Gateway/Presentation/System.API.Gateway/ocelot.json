@@ -1,0 +1,33 @@
+{
+  "Routes": [
+    {
+        "DownstreamPathTemplate": "/api/identity/{everything}",
+        "DownstreamScheme": "https",
+        "DownstreamHostAndPorts": [
+            {
+                "Host": "localhost",
+                "Port": 5001
+            }
+        ],
+        "UpstreamPathTemplate": "/identity/{everything}",
+        "UpstreamHttpMethod": [ "POST", "GET" ],
+        "RateLimitOptions": {
+            "ClientWhitelist": [ "127.0.0.1" ], // İstek sınırından muaf IP'ler
+            "EnableRateLimiting": true, // Rate limiting aktif hale gelir
+            "Period": "1m", // Zaman aralığı (1 dakika)
+            "PeriodTimespan": 60, // Zaman aralığının süresi (60 saniye)
+            "Limit": 5 // Maksimum istek sayısı (5 istek)
+        },
+        "AuthenticationOptions": {
+            "AuthenticationProviderKey": "IdentityApiKey"
+        }
+    }
+  ],
+    "GlobalConfiguration": {
+        "BaseUrl": "https://localhost:5000",
+        "RateLimitOptions": {
+            "DisableRateLimitHeaders": false, // Rate limit bilgisi header'da döner
+            "QuotaExceededMessage": "Too many requests" // Sınır aşıldığında dönecek mesaj
+        }
+    }
+}

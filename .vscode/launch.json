@@ -1,0 +1,26 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": ".NET Core Launch (Web.API)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "/Users/mac/Desktop/MegaCode/Backend/PORTAL_MUHASEBE_BACKEND/System.API.MegaCode/System.API.MegaCode.Admin/Presentation/Web.API/bin/Debug/net8.0/Web.API.dll",
+      "args": [],
+      "cwd": "/Users/mac/Desktop/MegaCode/Backend/PORTAL_MUHASEBE_BACKEND/System.API.MegaCode/System.API.MegaCode.Admin/Presentation/Web.API",
+      "stopAtEntry": false,
+      "serverReadyAction": {
+        "action": "openExternally",
+        "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+      },
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_URLS": "https://localhost:44398;http://localhost:5080"
+      },
+      "sourceFileMap": {
+        "/Views": "${workspaceFolder}/Views"
+      }
+    }
+  ]
+}

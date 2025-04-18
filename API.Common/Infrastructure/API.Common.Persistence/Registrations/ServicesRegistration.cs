@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Quartz;
 using WatchDog;
 using WatchDog.src.Enums;
 
@@ -34,6 +35,26 @@ namespace API.Common.Persistence.Registrations
                 options.JsonSerializerOptions.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull;
                 options.JsonSerializerOptions.MaxDepth = 64;
             });
+            services.AddScoped<UpdateOrderStatusJob>(); // Job class'ını DI'ye ekle
+
+            // Quartz kurulumu
+            services.AddQuartz(q =>
+            {
+                q.UseMicrosoftDependencyInjectionJobFactory();
+
+                var jobKey = new JobKey("UpdateOrderStatusJob");
+
+                q.AddJob<UpdateOrderStatusJob>(opts => opts.WithIdentity(jobKey));
+
+                q.AddTrigger(opts => opts
+                    .ForJob(jobKey)
+                    .WithIdentity("UpdateOrderStatusJob-trigger")
+                    .WithSimpleSchedule(x => x
+                        .WithIntervalInHours(1) // test için
+                        .RepeatForever()));
+            });
+
+            services.AddQuartzHostedService(opt => opt.WaitForJobsToComplete = true);
         }
     }
 }

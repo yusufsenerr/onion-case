@@ -16,14 +16,14 @@ namespace API.Common.Application.JwtTokens
 
         public async Task<string> JwtTokenGenerate(AppUser user)
         {
-            //var userRoles = await this.userManager.GetRolesAsync(user);
             var claims = new List<Claim>
             {
                 new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
                 new Claim(JwtRegisteredClaimNames.Email, user.Email!),
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()), 
                 new Claim("Id", user.Id.ToString()),
-                new Claim("name", user.UserName!),  
+                new Claim("name", user.UserName!),
+                new Claim("role", user.Role.Name),
                 new Claim(ClaimTypes.Name, user.UserName!),  
                 new Claim("FullName", user.FirstName + " " + user.LastName),
             };

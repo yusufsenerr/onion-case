@@ -14,7 +14,6 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
-    <PackageReference Include="Elasticsearch.Net" Version="7.17.4" />
     <PackageReference Include="FluentValidation" Version="11.11.0" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.11.0" />
     <PackageReference Include="MediatR" Version="11.0.0" />
@@ -30,7 +29,9 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="NEST" Version="7.17.4" />
+    <PackageReference Include="Quartz" Version="3.14.0" />
+    <PackageReference Include="Quartz.Extensions.DependencyInjection" Version="3.14.0" />
+    <PackageReference Include="Quartz.Extensions.Hosting" Version="3.14.0" />
     <PackageReference Include="RestSharp" Version="112.1.0" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.0.2" />
     <PackageReference Include="WatchDog.NET" Version="1.4.11" />
@@ -41,7 +42,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Queries\Product\" />
     <Folder Include="LogService\" />
   </ItemGroup>
 

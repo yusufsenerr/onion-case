@@ -1,5 +1,7 @@
 ﻿using API.Common.Application.Features.Commands.Product.Create;
 using API.Common.Application.Features.Commands.Product.Remove;
+using API.Common.Application.Features.Queries.Authentications;
+using API.Common.Application.Features.Queries.Product.Get;
 using API.Common.Domain.Commons;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -15,6 +17,12 @@ namespace Web.API.Controllers.Product
         public async Task<IActionResult> CreateProduct(CreateProductCommandRequest createProductCommandRequest)
         {
             BaseResponse response = await this.mediator.Send(createProductCommandRequest);
+            return Ok(response);
+        }
+        [HttpPost("[action]")]
+        public async Task<IActionResult> GetAllProduct()
+        {
+            var response = await this.mediator.Send(new GetProductQueryRequest());
             return Ok(response);
         }
         [HttpPost("[action]")]

@@ -1,7 +1,6 @@
-using API.Common.Persistence.Registrations;
+﻿using API.Common.Persistence.Registrations;
 using Application.MappingRegistration;
 using Microsoft.AspNetCore.HttpOverrides;
-using Microsoft.EntityFrameworkCore;
 using Persistence.Context;
 using Persistence.Mapping;
 using WatchDog;
@@ -25,8 +24,6 @@ builder.Services.MediaTrMappingAddPersistenceServices(builder.Configuration);
 builder.Services.AddSignalR();
 
 #endregion
-
-
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

@@ -16,12 +16,6 @@ public class LoggingService( IHttpContextAccessor httpContextAccessor)
         var name = context?.User?.Identity?.Name;
         var username = context?.User.Claims.FirstOrDefault(c => c.Type == "FullName")?.Value;
         var userId = context?.User.Claims.FirstOrDefault(c => c.Type == "Id")?.Value;
-        var ip = context.Connection.RemoteIpAddress;
-        if (ip != null && ip.IsIPv4MappedToIPv6)
-        {
-            ip = ip.MapToIPv4();
-        }
-        var ipAddress = ip?.ToString();
         var pageUrl = context?.Request.Path.Value;
 
         var logEntry = new CustomLogModel<T>
@@ -30,7 +24,6 @@ public class LoggingService( IHttpContextAccessor httpContextAccessor)
             PageUrl = pageUrl,
             TableName = tableName,
             CrudOperation = operation,
-            IpAddress = ipAddress,
             ActionTime = DateTime.UtcNow,
             Data = data
         };

@@ -20,6 +20,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Ocelot" Version="23.3.3" />
+    <PackageReference Include="Quartz.Extensions.DependencyInjection" Version="3.14.0" />
     <PackageReference Include="WatchDog.NET" Version="1.4.11" />
   </ItemGroup>
 

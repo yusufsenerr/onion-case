@@ -8,6 +8,7 @@ namespace API.Common.Domain.Orders
         public Guid AppUserId { get; set; } // Foreign key
         public AppUser AppUser { get; set; } // Navigation property
         public decimal TotalAmount { get; set; }
+        public string Status { get; set; }
         public ICollection<OrderItem> OrderItems { get; set; }
     }
 }

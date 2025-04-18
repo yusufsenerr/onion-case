@@ -1,15 +1,22 @@
 ﻿using API.Common.Application.Abstractions.MenuRequirement;
 using API.Common.Application.DTOs.Queries.Autentication;
 using API.Common.Application.DTOs.Queries.Balance;
+using API.Common.Application.DTOs.Queries.Order;
+using API.Common.Application.DTOs.Queries.Product;
 using API.Common.Application.Features.Commands.Authentications.Create.Login;
 using API.Common.Application.Features.Commands.Authentications.Create.Register;
 using API.Common.Application.Features.Commands.Authentications.Remove;
 using API.Common.Application.Features.Commands.Authentications.Update;
+using API.Common.Application.Features.Commands.Order;
+using API.Common.Application.Features.Commands.Product.Create;
+using API.Common.Application.Features.Commands.Product.Remove;
 using API.Common.Application.Features.Commands.Role.Create;
 using API.Common.Application.Features.Commands.Role.Remove;
 using API.Common.Application.Features.Commands.UserBalance.AddBalance;
 using API.Common.Application.Features.Queries.Authentications;
 using API.Common.Application.Features.Queries.Balance.GetBalance;
+using API.Common.Application.Features.Queries.Order;
+using API.Common.Application.Features.Queries.Product.Get;
 using API.Common.Application.Features.Queries.Role;
 using API.Common.Application.Features.Queries.Role.RolePermission;
 using API.Common.Application.JwtTokens;
@@ -42,14 +49,24 @@ namespace Persistence.Mapping
             services.AddScoped<IRequestHandler<RemoveUserCommandRequest, BaseResponse>, RemoveUserCommandHandler<ApplicationDbContext>>();
             services.AddScoped<IRequestHandler<ResetPasswordCommandRequest, BaseResponse>, ResetPasswordCommandHandler<ApplicationDbContext>>();
 
-
             #endregion
 
             #region Balance
             services.AddScoped<IRequestHandler<GetBalanceByIdQueryRequest, UserBalanceDto>, GetBalanceByIdQueryHandler<ApplicationDbContext>>();
             services.AddScoped<IRequestHandler<AddUserBalanceCommandRequest, BaseResponse>, AddUserBalanceCommandHandler<ApplicationDbContext>>();
             #endregion
+            #region Product
+            services.AddScoped<IRequestHandler<CreateProductCommandRequest, BaseResponse>, CreateProductCommandHandler<ApplicationDbContext>>();
+            services.AddScoped<IRequestHandler<RemoveProductCommandRequest, BaseResponse>, RemoveProductCommandHandler<ApplicationDbContext>>();
+            services.AddScoped<IRequestHandler<GetProductQueryRequest, List<ProductDto>>, GetProductQueryHandler<ApplicationDbContext>>();
+            #endregion
 
+            #region Order
+            services.AddScoped<IRequestHandler<CreateOrderCommandRequest, BaseResponse>, CreateOrderCommandHandler<ApplicationDbContext>>();
+            services.AddScoped<IRequestHandler<GetAllOrderByIdCommandRequest, List<OrderDto>>, GetAllOrderByIdCommandHandler<ApplicationDbContext>>();
+            services.AddScoped<IRequestHandler<UpdateOrdersToCompletedCommand, Unit>, UpdateOrdersToCompletedCommandHandler<ApplicationDbContext>>();
+
+            #endregion
             #region Role
             services.AddScoped<IRequestHandler<CreateRolePermissionsCommandRequest, BaseResponse>, CreateRolePermissionsCommandHandler<ApplicationDbContext>>();
             services.AddScoped<IRequestHandler<RegisterRoleCommandRequest, BaseResponse>, RegisterRoleCommandHandler<ApplicationDbContext>>();

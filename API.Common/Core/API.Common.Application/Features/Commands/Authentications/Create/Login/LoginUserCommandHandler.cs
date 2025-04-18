@@ -22,14 +22,14 @@ namespace API.Common.Application.Features.Commands.Authentications.Create.Login
 
         public async Task<BaseResponse> Handle(LoginUserCommandRequest request, CancellationToken cancellationToken)
         {
-            var user = await this.userManager.Users.FirstOrDefaultAsync(x=>x.IdentityNumber == request.TcIdentityNumber);
+            var user = await this.userManager.Users.Include(x=>x.Role).FirstOrDefaultAsync(x=>x.IdentityNumber == request.TcIdentityNumber);
 
             if (user == null)
             {
-                this.loggingService.LogAction("User", $"Geçersiz e-posta adresi ile oturum açma girişimi : {request.TcIdentityNumber}",user);
+                this.loggingService.LogAction("User", $"Geçersiz T.C Kimlik numarası ile oturum açma girişimi : {request.TcIdentityNumber}",user);
                 return new BaseResponse
                 {
-                    Message = "Geçersiz e-posta adresi veya şifre.",
+                    Message = "Geçersiz T.C Kimlik numarası veya şifre.",
                     Succeeded = false
                 };
             }
@@ -69,7 +69,7 @@ namespace API.Common.Application.Features.Commands.Authentications.Create.Login
 
                 return new BaseResponse
                 {
-                    Message = "Geçersiz e-posta adresi veya şifre.",
+                    Message = "Geçersiz T.C Kimlik numarası veya şifre.",
                     Succeeded = false
                 };
             }

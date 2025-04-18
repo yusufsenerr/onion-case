@@ -13,6 +13,8 @@ namespace API.Common.Persistence.Configurations.Order
                 .WithMany()
                 .HasForeignKey(oi => oi.ProductId)
                 .OnDelete(DeleteBehavior.NoAction);
+            builder.Property(oi => oi.UnitPrice)
+           .HasPrecision(18, 2);
         }
     }
 

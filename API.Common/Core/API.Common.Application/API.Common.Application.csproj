@@ -41,7 +41,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Abstractions\CRUDService\" />
     <Folder Include="Features\Queries\Product\" />
     <Folder Include="LogService\" />
   </ItemGroup>

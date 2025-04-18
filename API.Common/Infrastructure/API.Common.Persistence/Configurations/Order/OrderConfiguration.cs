@@ -18,6 +18,8 @@ namespace API.Common.Persistence.Configurations.Order
                 .WithOne(oi => oi.Order)
                 .HasForeignKey(oi => oi.OrderId)
                 .OnDelete(DeleteBehavior.Cascade);
+            builder.Property(o => o.TotalAmount)
+          .HasPrecision(18, 2);
         }
     }
 

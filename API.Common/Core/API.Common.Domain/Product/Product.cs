@@ -7,5 +7,6 @@ namespace API.Common.Domain.Product
         public decimal Price { get; set; }
         public string Description { get; set; }
         public int Stock {  get; set; }
+        public ICollection<API.Common.Domain.ProductImage.ProductImage> ProductImages { get; set; }
     }
 }

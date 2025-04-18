@@ -2,6 +2,7 @@
 using API.Common.Domain.Logs;
 using API.Common.Domain.Orders;
 using API.Common.Domain.Product;
+using API.Common.Domain.ProductImage;
 using API.Common.Domain.Roles;
 using API.Common.Domain.SystemAdmin;
 using API.Common.Domain.Users;
@@ -26,6 +27,7 @@ namespace Persistence.Context
             base.OnModelCreating(modelBuilder);
         }
         public DbSet<UserBalance> UserBalances { get; set; }
+        public DbSet<ProductImage > ProductImages { get; set; } 
         public DbSet<Product> Products { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }

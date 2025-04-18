@@ -1,4 +1,5 @@
 ﻿using API.Common.Application.Features.Commands.Role.Create;
+using API.Common.Application.Features.Commands.UserBalance.AddBalance;
 using API.Common.Application.Features.Queries.Balance.GetBalance;
 using API.Common.Domain.Commons;
 using MediatR;
@@ -20,9 +21,9 @@ namespace Web.API.Controllers.Balance
         }
 
         [HttpPost("[action]")]
-        public async Task<IActionResult> AddBalance(RegisterRoleCommandRequest createRoleCommandRequest)
+        public async Task<IActionResult> AddBalance(AddUserBalanceCommandRequest addUserBalanceCommandRequest)
         {
-            BaseResponse response = await this.mediator.Send(createRoleCommandRequest);
+            BaseResponse response = await this.mediator.Send(addUserBalanceCommandRequest);
             return Ok(response);
         }
     }

@@ -7,6 +7,7 @@ using API.Common.Application.Features.Commands.Authentications.Remove;
 using API.Common.Application.Features.Commands.Authentications.Update;
 using API.Common.Application.Features.Commands.Role.Create;
 using API.Common.Application.Features.Commands.Role.Remove;
+using API.Common.Application.Features.Commands.UserBalance.AddBalance;
 using API.Common.Application.Features.Queries.Authentications;
 using API.Common.Application.Features.Queries.Balance.GetBalance;
 using API.Common.Application.Features.Queries.Role;
@@ -46,6 +47,7 @@ namespace Persistence.Mapping
 
             #region Balance
             services.AddScoped<IRequestHandler<GetBalanceByIdQueryRequest, UserBalanceDto>, GetBalanceByIdQueryHandler<ApplicationDbContext>>();
+            services.AddScoped<IRequestHandler<AddUserBalanceCommandRequest, BaseResponse>, AddUserBalanceCommandHandler<ApplicationDbContext>>();
             #endregion
 
             #region Role

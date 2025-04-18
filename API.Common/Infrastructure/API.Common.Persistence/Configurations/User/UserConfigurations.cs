@@ -17,6 +17,12 @@ namespace API.Common.Persistence.Configurations.User
             .OnDelete(DeleteBehavior.NoAction);
 
             builder
+            .HasMany(u => u.Orders)
+            .WithOne(r => r.AppUser)
+            .HasForeignKey(u => u.AppUserId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+            builder
                 .HasOne(u => u.UserBalance)
                 .WithOne(b => b.AppUser)
                 .HasForeignKey<UserBalance>(b => b.AppUserId)

@@ -1,10 +1,9 @@
-﻿using API.Common.Domain.Orders;
+﻿using API.Common.Domain.Commons;
 using API.Common.Domain.Roles;
-using Microsoft.AspNetCore.Identity;
 
-namespace API.Common.Domain.Users
+namespace API.Common.Domain.SystemAdmin
 {
-    public class AppUser : IdentityUser<Guid>
+    public class SystemAdmin:BaseEntity
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -12,9 +11,8 @@ namespace API.Common.Domain.Users
         public string IdentityNumber { get; set; }
         public string PlaceOfBirth { get; set; } //Doğum Yeri
         public string BloodGroup { get; set; }
+        public string PhoneNumber { get; set; }
         public Guid RoleId { get; set; }
         public AppRole Role { get; set; }
-        public API.Common.Domain.Balance.UserBalance UserBalance { get; set; }
-        public ICollection<Order> Orders { get; set; }
     }
 }

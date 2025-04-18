@@ -14,7 +14,7 @@ namespace API.Common.Application.Features.Commands.Authentications.Create.Regist
     public class RegisterUserCommandHandler<TDbContext>(
         UserManager<AppUser> userManager,
         IReadRepository<TDbContext, Permission> permissionReadRepository,
-        IWriteRepository<TDbContext, UserBalance> balanceWriteRepository,
+        IWriteRepository<TDbContext, API.Common.Domain.Balance.UserBalance> balanceWriteRepository,
         IWriteRepository<TDbContext, Permission> permissionWriteRepository
 
         ) : IRequestHandler<RegisterUserCommandRequest, BaseResponse>
@@ -24,7 +24,7 @@ namespace API.Common.Application.Features.Commands.Authentications.Create.Regist
 
         readonly IReadRepository<TDbContext, Permission> permissionReadRepository = permissionReadRepository;
         readonly IWriteRepository<TDbContext, Permission> permissionWriteRepository = permissionWriteRepository;
-        readonly IWriteRepository<TDbContext, UserBalance> balanceWriteRepository = balanceWriteRepository;
+        readonly IWriteRepository<TDbContext, API.Common.Domain.Balance.UserBalance> balanceWriteRepository = balanceWriteRepository;
 
         public async Task<BaseResponse> Handle(RegisterUserCommandRequest request, CancellationToken cancellationToken)
         {
@@ -58,13 +58,11 @@ namespace API.Common.Application.Features.Commands.Authentications.Create.Regist
                 }
                 else
                 {
-                    var balance = new UserBalance
+                    var balance = new API.Common.Domain.Balance.UserBalance
                     {
                         Amount = 0,
                         Currency = "TRY",
                         AppUserId = user.Id,
-
-
                     };
                     var createBalance = await this.balanceWriteRepository.AddAsync(balance);
                 }

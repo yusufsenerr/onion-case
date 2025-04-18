@@ -3,9 +3,9 @@ using AutoMapper;
 
 namespace Application.MappingRegistration.Mapper.AppUser
 {
-    public class UserBalanceProfile : Profile
+    public class AppUserProfile : Profile
     {
-       public UserBalanceProfile()
+       public AppUserProfile()
        {
             CreateMap<API.Common.Domain.Users.AppUser, UserDto>()
                 .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.Id))

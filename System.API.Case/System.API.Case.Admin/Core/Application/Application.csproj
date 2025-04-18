@@ -34,7 +34,6 @@
   <ItemGroup>
     <Folder Include="Features\Commands\" />
     <Folder Include="Features\Queries\" />
-    <Folder Include="MappingRegistration\Mapper\AppUser\" />
   </ItemGroup>
 
 </Project>

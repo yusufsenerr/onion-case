@@ -6,6 +6,6 @@ namespace API.Common.Application.Features.Queries.Balance.GetBalance
 {
     public class GetBalanceByIdQueryRequest:IRequest<UserBalanceDto>
     {
-        public Guid Id { get; set; }
+        public Guid AppUserId { get; set; }
     }
 }

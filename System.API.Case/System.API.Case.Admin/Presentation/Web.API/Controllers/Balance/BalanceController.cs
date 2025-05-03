@@ -1,8 +1,8 @@
-﻿using API.Common.Application.Features.Commands.Role.Create;
-using API.Common.Application.Features.Commands.UserBalance.AddBalance;
+﻿using API.Common.Application.Features.Commands.UserBalance.AddBalance;
 using API.Common.Application.Features.Queries.Balance.GetBalance;
 using API.Common.Domain.Commons;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Web.API.Controllers.Balance
@@ -12,14 +12,14 @@ namespace Web.API.Controllers.Balance
     public class BalanceController(IMediator mediator) : ControllerBase
     {
         readonly IMediator mediator = mediator;
-
+        [Authorize(Roles = "Customer")]
         [HttpPost("[action]")]
         public async Task<IActionResult> GetBalance(GetBalanceByIdQueryRequest request)
         {
             var balance = await this.mediator.Send(request);
             return Ok(balance);
         }
-
+        [Authorize(Roles = "Customer")]
         [HttpPost("[action]")]
         public async Task<IActionResult> AddBalance(AddUserBalanceCommandRequest addUserBalanceCommandRequest)
         {

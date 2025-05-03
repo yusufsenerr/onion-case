@@ -1,7 +1,8 @@
-﻿using API.Common.Application.Features.Commands.Order;
+﻿using API.Common.Application.Features.Commands.Order.Create;
 using API.Common.Application.Features.Queries.Order;
 using API.Common.Domain.Commons;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Web.API.Controllers.Order
@@ -11,13 +12,14 @@ namespace Web.API.Controllers.Order
     public class OrderControllerController(IMediator mediator) : ControllerBase
     {
         readonly IMediator mediator = mediator;
-
+        [Authorize(Roles = "Customer")]
         [HttpPost("[action]")]
         public async Task<IActionResult> CreateOrder(CreateOrderCommandRequest createProductCommandRequest)
         {
             BaseResponse response = await this.mediator.Send(createProductCommandRequest);
             return Ok(response);
         }
+        [Authorize(Roles = "Customer")]
         [HttpPost("[action]")]
         public async Task<IActionResult> GetAllOrderById(GetAllOrderByIdCommandRequest request)
         {

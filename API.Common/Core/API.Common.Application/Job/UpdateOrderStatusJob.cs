@@ -1,4 +1,4 @@
-﻿using API.Common.Application.Features.Commands.Order;
+﻿using API.Common.Application.Features.Commands.Order.Update;
 using MediatR;
 using Quartz;
 

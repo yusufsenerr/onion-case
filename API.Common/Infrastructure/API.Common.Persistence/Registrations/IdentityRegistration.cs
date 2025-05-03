@@ -1,5 +1,4 @@
-﻿using API.Common.Application.Abstractions.MenuRequirement;
-using API.Common.Application.IdentityMessage;
+﻿using API.Common.Application.IdentityMessage;
 using API.Common.Domain.Roles;
 using API.Common.Domain.Users;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -34,11 +33,6 @@ namespace API.Common.Persistence.Registrations
                 .AddEntityFrameworkStores<TContext>()
                 .AddDefaultTokenProviders()
                 .AddErrorDescriber<CustomIdentityErrorDescriber>();
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("Menus", policy =>
-                policy.Requirements.Add(new MenuAccessRequirement()));
-            });
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

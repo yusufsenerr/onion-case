@@ -29,10 +29,8 @@ namespace API.Common.Application.Features.Commands.Authentications.Update
             user.FirstName = request.FirstName;
             user.LastName = request.LastName;
             user.PhoneNumber = request.Phone;
-            user.PlaceOfBirth = request.PlaceOfBirth;
             user.IdentityType = request.IdentityType;
             user.IdentityNumber = request.IdentityNumber;
-            user.BloodGroup = request.BloodGroup;
 
             if (user.Email != request.Email)
             {

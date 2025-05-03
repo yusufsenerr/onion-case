@@ -15,13 +15,13 @@ namespace API.Common.Persistence.Registrations
     {
         public static void IoCServices(this IServiceCollection services, IConfiguration configuration)
         {
-            //Dependency Injection 
             services.AddScoped(typeof(IReadRepository<,>), typeof(ReadRepository<,>));
             services.AddScoped(typeof(IWriteRepository<,>), typeof(WriteRepository<,>));
             services.AddScoped(typeof(IUserService<>), typeof(UserService<>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
             services.AddHttpContextAccessor();
             services.AddScoped<LoggingService>();
+            services.AddValidationServices();
         }
 
     }

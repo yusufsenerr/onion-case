@@ -100,107 +100,6 @@ namespace Persistence.Migrations
                     b.ToTable("WatchDog_Logs");
                 });
 
-            modelBuilder.Entity("API.Common.Domain.Menu.MenuButtonPermission", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("AppUserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<bool>("Create")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("Delete")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("ExportExcel")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("ExportPdf")
-                        .HasColumnType("bit");
-
-                    b.Property<bool?>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<bool?>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<Guid>("MenuItemId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("Read")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("Update")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AppUserId");
-
-                    b.HasIndex("MenuItemId");
-
-                    b.ToTable("MenuButtonPermission");
-                });
-
-            modelBuilder.Entity("API.Common.Domain.Menu.MenuItem", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Icon")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool?>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<bool?>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Key")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Label")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("ParentMenuItemId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("RouterLink")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ParentMenuItemId");
-
-                    b.ToTable("MenuItem");
-                });
-
             modelBuilder.Entity("API.Common.Domain.Orders.Order", b =>
                 {
                     b.Property<Guid>("Id")
@@ -220,6 +119,10 @@ namespace Persistence.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("TotalAmount")
@@ -364,116 +267,6 @@ namespace Persistence.Migrations
                     b.ToTable("AspNetRoles", (string)null);
                 });
 
-            modelBuilder.Entity("API.Common.Domain.Roles.RoleMenuPermissions", b =>
-                {
-                    b.Property<Guid>("AppRoleId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<bool>("Create")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("Delete")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("ExportExcel")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("ExportPdf")
-                        .HasColumnType("bit");
-
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<bool?>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<bool?>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<Guid>("MenuItemId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("Read")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("Update")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("AppRoleId");
-
-                    b.HasIndex("MenuItemId");
-
-                    b.ToTable("RoleMenuPermissions");
-                });
-
-            modelBuilder.Entity("API.Common.Domain.SystemAdmin.SystemAdmin", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("BloodGroup")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("IdentityNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("IdentityType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool?>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<bool?>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PlaceOfBirth")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("RoleId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("SystemAdmins");
-                });
-
             modelBuilder.Entity("API.Common.Domain.Users.AppUser", b =>
                 {
                     b.Property<Guid>("Id")
@@ -482,10 +275,6 @@ namespace Persistence.Migrations
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
-
-                    b.Property<string>("BloodGroup")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -536,10 +325,6 @@ namespace Persistence.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
-
-                    b.Property<string>("PlaceOfBirth")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("RoleId")
                         .HasColumnType("uniqueidentifier");
@@ -683,34 +468,6 @@ namespace Persistence.Migrations
                     b.Navigation("AppUser");
                 });
 
-            modelBuilder.Entity("API.Common.Domain.Menu.MenuButtonPermission", b =>
-                {
-                    b.HasOne("API.Common.Domain.Users.AppUser", "AppUser")
-                        .WithMany()
-                        .HasForeignKey("AppUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("API.Common.Domain.Menu.MenuItem", "MenuItem")
-                        .WithMany("MenuButtonPermissions")
-                        .HasForeignKey("MenuItemId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AppUser");
-
-                    b.Navigation("MenuItem");
-                });
-
-            modelBuilder.Entity("API.Common.Domain.Menu.MenuItem", b =>
-                {
-                    b.HasOne("API.Common.Domain.Menu.MenuItem", "ParentMenuItem")
-                        .WithMany("Items")
-                        .HasForeignKey("ParentMenuItemId");
-
-                    b.Navigation("ParentMenuItem");
-                });
-
             modelBuilder.Entity("API.Common.Domain.Orders.Order", b =>
                 {
                     b.HasOne("API.Common.Domain.Users.AppUser", "AppUser")
@@ -750,36 +507,6 @@ namespace Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("API.Common.Domain.Roles.RoleMenuPermissions", b =>
-                {
-                    b.HasOne("API.Common.Domain.Roles.AppRole", "AppRole")
-                        .WithMany("RoleMenuPermissions")
-                        .HasForeignKey("AppRoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("API.Common.Domain.Menu.MenuItem", "MenuItem")
-                        .WithMany("RoleMenuPermissions")
-                        .HasForeignKey("MenuItemId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AppRole");
-
-                    b.Navigation("MenuItem");
-                });
-
-            modelBuilder.Entity("API.Common.Domain.SystemAdmin.SystemAdmin", b =>
-                {
-                    b.HasOne("API.Common.Domain.Roles.AppRole", "Role")
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Role");
                 });
 
             modelBuilder.Entity("API.Common.Domain.Users.AppUser", b =>
@@ -844,15 +571,6 @@ namespace Persistence.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("API.Common.Domain.Menu.MenuItem", b =>
-                {
-                    b.Navigation("Items");
-
-                    b.Navigation("MenuButtonPermissions");
-
-                    b.Navigation("RoleMenuPermissions");
-                });
-
             modelBuilder.Entity("API.Common.Domain.Orders.Order", b =>
                 {
                     b.Navigation("OrderItems");
@@ -865,8 +583,6 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("API.Common.Domain.Roles.AppRole", b =>
                 {
-                    b.Navigation("RoleMenuPermissions");
-
                     b.Navigation("Users");
                 });
 

@@ -1,8 +1,5 @@
-﻿using API.Common.Application.Interfaces.IReadRepositories;
-using API.Common.Application.Interfaces.IWriteRepositories;
-using API.Common.Domain.Balance;
+﻿using API.Common.Application.Interfaces.IWriteRepositories;
 using API.Common.Domain.Commons;
-using API.Common.Domain.Permissions;
 using API.Common.Domain.Users;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
@@ -13,17 +10,13 @@ namespace API.Common.Application.Features.Commands.Authentications.Create.Regist
 {
     public class RegisterUserCommandHandler<TDbContext>(
         UserManager<AppUser> userManager,
-        IReadRepository<TDbContext, Permission> permissionReadRepository,
-        IWriteRepository<TDbContext, API.Common.Domain.Balance.UserBalance> balanceWriteRepository,
-        IWriteRepository<TDbContext, Permission> permissionWriteRepository
+        IWriteRepository<TDbContext, API.Common.Domain.Balance.UserBalance> balanceWriteRepository
 
         ) : IRequestHandler<RegisterUserCommandRequest, BaseResponse>
     where TDbContext : DbContext
     {
         readonly UserManager<AppUser> userManager = userManager;
 
-        readonly IReadRepository<TDbContext, Permission> permissionReadRepository = permissionReadRepository;
-        readonly IWriteRepository<TDbContext, Permission> permissionWriteRepository = permissionWriteRepository;
         readonly IWriteRepository<TDbContext, API.Common.Domain.Balance.UserBalance> balanceWriteRepository = balanceWriteRepository;
 
         public async Task<BaseResponse> Handle(RegisterUserCommandRequest request, CancellationToken cancellationToken)
@@ -43,8 +36,6 @@ namespace API.Common.Application.Features.Commands.Authentications.Create.Regist
                     LastName = request.LastName,
                     IdentityType = request.IdentityType,
                     IdentityNumber = request.IdentityNumber,
-                    PlaceOfBirth = request.PlaceOfBirth,
-                    BloodGroup = request.BloodGroup,
                     PhoneNumber = request.Phone,
                     RoleId = request.RoleId,
                 };

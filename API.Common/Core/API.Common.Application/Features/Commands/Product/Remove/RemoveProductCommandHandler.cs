@@ -1,5 +1,4 @@
-﻿using API.Common.Application.Features.Commands.Permissions.Remove;
-using API.Common.Application.Interfaces.IWriteRepositories;
+﻿using API.Common.Application.Interfaces.IWriteRepositories;
 using API.Common.Domain.Commons;
 using MediatR;
 using Microsoft.EntityFrameworkCore;

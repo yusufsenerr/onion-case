@@ -29,7 +29,6 @@ namespace API.Common.Application.Features.Commands.Authentications.Remove
                         Succeeded = false
                     };
                 }
-                // Kullanıcıyı sil
                 var result = await userManager.DeleteAsync(user);
                 if (!result.Succeeded)
                 {

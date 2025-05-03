@@ -18,14 +18,14 @@ namespace API.Common.Application.Models
                 if (pageSize <= 0) throw new ArgumentException("Page size must be greater than 0.", nameof(pageSize));
 
                 return query
-                    .Skip((pageNumber.Value - 1) * pageSize.Value) // Nullable değerlerin .Value ile alınması
-                    .Take(pageSize.Value);// Alınacak kayıt sayısı
+                    .Skip((pageNumber.Value - 1) * pageSize.Value)
+                    .Take(pageSize.Value);
             }
             return query;
         }
         public static PaginationResult<T> ApplyPaginationWithCount<T>(IQueryable<T> query, int? pageNumber, int? pageSize)
         {
-            var totalRecords = query.Count(); // Toplam kayıt sayısını al
+            var totalRecords = query.Count();
 
             if (pageNumber.HasValue && pageSize.HasValue)
             {
@@ -44,10 +44,9 @@ namespace API.Common.Application.Models
                 };
             }
 
-            // Eğer sayfalama parametreleri yoksa tüm kayıtları döndür
             return new PaginationResult<T>
             {
-                Data = query.ToList(), // Tüm kayıtlar
+                Data = query.ToList(),
                 TotalRecords = totalRecords
             };
         }

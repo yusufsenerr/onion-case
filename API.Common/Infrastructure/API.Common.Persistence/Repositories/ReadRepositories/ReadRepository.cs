@@ -69,7 +69,6 @@ namespace API.Common.Persistence.Repositories.ReadRepositories
             {
                 pageSize = 10;
             }
-            // İlişkileri sorguya dahil et
             if (includes != null && includes.Any())
             {
                 query = includes.Aggregate(query, (current, include) => current.Include(include));
@@ -77,7 +76,6 @@ namespace API.Common.Persistence.Repositories.ReadRepositories
 
             query = query.OrderBy(e => e.Id); // Burada Id'ye göre sıralama yapılır (Primary Key veya uygun bir alan seçin)
 
-            // Sayfalama uygula
             if (pageNumber.HasValue && pageSize.HasValue)
             {
                 return Pagination.ApplyPagination(query, pageNumber, pageSize);

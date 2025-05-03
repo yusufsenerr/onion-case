@@ -1,9 +1,9 @@
 ﻿using API.Common.Application.Features.Commands.Role.Create;
 using API.Common.Application.Features.Commands.Role.Remove;
 using API.Common.Application.Features.Queries.Role;
-using API.Common.Application.Features.Queries.Role.RolePermission;
 using API.Common.Domain.Commons;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Web.API.Controllers.Authentication
@@ -13,21 +13,21 @@ namespace Web.API.Controllers.Authentication
     public class RoleController(IMediator mediator) : ControllerBase
     {
         readonly IMediator mediator = mediator;
-
+        [Authorize(Roles = "SystemAdministrators")]
         [HttpPost("[action]")]
         public async Task<IActionResult> GetAllRoles(GetAllRoleQueryRequest request)
         {
             var roles = await this.mediator.Send(request);
             return Ok(roles);
         }
-
+        [Authorize(Roles = "SystemAdministrators")]
         [HttpPost("[action]")]
         public async Task<IActionResult> CreateRole(RegisterRoleCommandRequest createRoleCommandRequest)
         {
             BaseResponse response = await this.mediator.Send(createRoleCommandRequest);
             return Ok(response);
         }
-
+        [Authorize(Roles = "SystemAdministrators")]
         [HttpPost("[action]")]
         public async Task<IActionResult> RemoveRole(RemoveRoleCommandRequest removeRoleCommandRequest)
         {

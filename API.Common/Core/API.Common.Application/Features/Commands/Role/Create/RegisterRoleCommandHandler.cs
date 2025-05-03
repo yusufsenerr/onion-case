@@ -20,10 +20,9 @@ namespace API.Common.Application.Features.Commands.Role.Create
         {
             try
             {
-                // ID ile rol kontrolü yapılıyor
                 var existingRole = await roleManager.FindByIdAsync(request.Id.ToString());
 
-                if (existingRole != null) // Rol mevcutsa güncelle
+                if (existingRole != null) 
                 {
                     existingRole.Name = request.Name;
 
@@ -37,7 +36,7 @@ namespace API.Common.Application.Features.Commands.Role.Create
                         return new BaseResponse { Message = "Rol güncellenirken bir hata oluştu.", Succeeded = false };
                     }
                 }
-                else // Rol mevcut değilse yeni oluştur
+                else
                 {
                     var roleExistsByName = await roleManager.RoleExistsAsync(request.Name);
                     if (roleExistsByName)

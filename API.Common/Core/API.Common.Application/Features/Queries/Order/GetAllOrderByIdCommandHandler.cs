@@ -14,7 +14,7 @@ namespace API.Common.Application.Features.Queries.Order
             var orders = await orderRepository
                 .GetWhere(o => o.AppUserId == request.AppUserId)
                 .Include(o => o.OrderItems)
-                .ThenInclude(oi => oi.Product) // ProductName için
+                .ThenInclude(oi => oi.Product)
                 .ToListAsync(cancellationToken);
 
             var result = orders.Select(order => new OrderDto

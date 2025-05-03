@@ -9,18 +9,13 @@ namespace API.Common.Persistence.Registrations
 {
     public static class ServicesRegistration
     {
-        public static void AddPersistenceServices<TContext,TLogContext>(this IServiceCollection services, IConfiguration configuration, string connectionStringName, string connectionLog)
+        public static void AddPersistenceServices<TContext>(this IServiceCollection services, IConfiguration configuration, string connectionStringName, string connectionLog)
        where TContext : DbContext
-        where TLogContext : DbContext
         {
             services.AddDbContext<TContext>(opt =>
             {
                 opt.UseSqlServer(configuration.GetConnectionString(connectionStringName));
             });
-            // services.AddDbContext<TContext>(opt =>
-            // {
-            //     opt.UseSqlServer(configuration.GetConnectionString(connectionStringName));
-            // });
 
             services.AddWatchDogServices(opt =>
             {
@@ -35,9 +30,8 @@ namespace API.Common.Persistence.Registrations
                 options.JsonSerializerOptions.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull;
                 options.JsonSerializerOptions.MaxDepth = 64;
             });
-            services.AddScoped<UpdateOrderStatusJob>(); // Job class'ını DI'ye ekle
+            services.AddScoped<UpdateOrderStatusJob>();
 
-            // Quartz kurulumu
             services.AddQuartz(q =>
             {
                 q.UseMicrosoftDependencyInjectionJobFactory();
@@ -50,7 +44,7 @@ namespace API.Common.Persistence.Registrations
                     .ForJob(jobKey)
                     .WithIdentity("UpdateOrderStatusJob-trigger")
                     .WithSimpleSchedule(x => x
-                        .WithIntervalInHours(1) // test için
+                        .WithIntervalInSeconds(30) // test için
                         .RepeatForever()));
             });
 

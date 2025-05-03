@@ -116,7 +116,6 @@ namespace API.Common.Persistence.Repositories.WriteRepositories
 
                 if (updatedEntities.Any())
                 {
-                    //menu-permissions update yaparken sıkıntı yaratıyor bu yüzden bu kod yazıldı
                     foreach (var entity in updatedEntities)
                     {
                         var trackedEntity = this.context.Set<TEntity>()
@@ -129,7 +128,6 @@ namespace API.Common.Persistence.Repositories.WriteRepositories
                         }
                     }
 
-                    // **Güncellenen entity'leri update et**
                     this.context.UpdateRange(updatedEntities);
                     this.loggingService.LogAction(typeof(TEntity).Name,
                         $"{updatedEntities.Count} adet {typeof(TEntity).Name} türünde varlık başarıyla güncellendi.", models);
@@ -263,7 +261,6 @@ namespace API.Common.Persistence.Repositories.WriteRepositories
                     return new BaseResponse { Succeeded = false, Message = "Varlık bulunamadı." };
                 }
 
-                // SQL'den sil
                 var isRemoved = Remove(model);
                 var success = await SaveAsync() > 0;
 
@@ -340,79 +337,5 @@ namespace API.Common.Persistence.Repositories.WriteRepositories
             }
         }
 
-        public async Task<BaseResponse> RemoveByModelAsync(string model, Guid id)
-        {
-            // Model adından ilgili DbSet'i bul
-            //    var modelType = AppDomain.CurrentDomain.GetAssemblies()
-            //                       .SelectMany(a => a.GetTypes())
-            //                       .FirstOrDefault(t => t.Name == model);
-
-            //    if (modelType == null)
-            //    {
-            //        return new BaseResponse
-            //        {
-            //            Succeeded = false,
-            //            Message = "Model bulunamadı."
-            //        };
-            //    }
-
-            //    // DbSet'i dinamik olarak al
-            //    var dbSet = (IQueryable<object>)context.GetType()
-            //                                           .GetMethod("Set")
-            //                                           .MakeGenericMethod(modelType)
-            //                                           .Invoke(context, null);
-
-            //    // Entity'i dinamik olarak sorgula
-            //    var entity = await dbSet.FirstOrDefaultAsync(e => (Guid)modelType.GetProperty("Id").GetValue(e) == id);
-
-            //    if (entity == null)
-            //    {
-            //        return new BaseResponse
-            //        {
-            //            Succeeded = false,
-            //            Message = "Silinecek kayıt bulunamadı."
-            //        };
-            //    }
-
-            //    // Silme işlemi (soft delete)
-            //    modelType.GetProperty("IsDeleted")?.SetValue(entity, true);
-
-            //    // Entity'yi güncelle
-            //    var entityEntry = context.Entry(entity);
-            //    entityEntry.State = EntityState.Modified;
-
-            //    // Entity'yi TEntity tipine dönüştür
-            //    var typedEntity = entity as TEntity;
-
-            //    // Elasticsearch güncellemesi
-            //    var success = await context.SaveChangesAsync() > 0;
-
-            //    if (success)
-            //    {
-            //        if (typedEntity != null)
-            //        {
-            //            var elasticSuccess = await elasticSearchRepository.AddOrUpdate(typedEntity);
-            //            if (!elasticSuccess)
-            //            {
-            //                WatchLogger.LogError($"ElasticSearch'ten silme başarısız. ID: {id}");
-            //                throw new Exception("SQL silme başarılı ancak Elasticsearch silme başarısız.");
-            //            }
-            //        }
-            //        else
-            //        {
-            //            return new BaseResponse
-            //            {
-            //                Succeeded = false,
-            //                Message = "Tip dönüşüm hatası."
-            //            };
-            //        }
-            //    }
-
-            return new BaseResponse
-            {
-                Succeeded = true,
-                Message = "Kayıt başarıyla silindi."
-            };
-        }
     }
 }

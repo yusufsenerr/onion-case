@@ -1,5 +1,4 @@
 ﻿using Application.MappingRegistration.Mapper.AppUser;
-using Application.MappingRegistration.Mapper.Permission;
 using Application.MappingRegistration.Mapper.Product;
 using Application.MappingRegistration.Mapper.UserBalance;
 using MediatR;
@@ -16,9 +15,8 @@ namespace Application.MappingRegistration
             
             services.AddAutoMapper(typeof(AppUserProfile).Assembly);
             services.AddAutoMapper(typeof(UserBalanceProfile).Assembly);
-            services.AddAutoMapper(typeof(PermissionProfile).Assembly);
             services.AddAutoMapper(typeof(ProductProfile).Assembly);
-            services.AddMediatR(Assembly.GetExecutingAssembly());
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
         }
     }

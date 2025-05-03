@@ -32,7 +32,7 @@ public class LoggingService( IHttpContextAccessor httpContextAccessor)
         {
             Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
             WriteIndented = false,
-            ReferenceHandler = ReferenceHandler.Preserve // Döngüleri kırmak için
+            ReferenceHandler = ReferenceHandler.Preserve
         };
 
         var logJson = JsonSerializer.Serialize(logEntry, options);

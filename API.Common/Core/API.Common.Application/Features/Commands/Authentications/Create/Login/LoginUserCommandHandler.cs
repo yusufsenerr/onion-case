@@ -75,11 +75,7 @@ namespace API.Common.Application.Features.Commands.Authentications.Create.Login
             }
 
             this.loggingService.LogAction("User", $"Başarılı giriş: {request.TcIdentityNumber} ",user);
-
-            // Başarılı giriş durumunda başarısız giriş sayısını sıfırla
             await this.userManager.ResetAccessFailedCountAsync(user);
-
-            // Token oluştur ve Refresh Token kaydet
             var userToken = this.generateJwtToken.JwtTokenGenerate(user);
 
             this.loggingService.LogAction("User",
